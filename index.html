@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerolyn Arte Digital - Criar Personagem</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>KEROLYN ARTE DIGITAL</h1>
+    <h2>CRIE SEU PERSONAGEM</h2>
+    <h4>“Por favor, preencha todos os campos abaixo para garantir uma criação precisa.”</h4>
+    <div class="form-box">
+        <form id="personagemForm">
+
+            <!-- Dados Pessoais -->
+            <h3>Dados Pessoais</h3>
+            <label>Nome: <input type="text" name="nome" required placeholder="Ex: Kerolyn"></label>
+            <label>Finalidade do personagem: <input type="text" name="finalidade" required placeholder="Ex: Gamer, comércio..."></label>
+            </label>
+            <hr>
+
+
+            <!-- Base do Personagem -->
+            <h3>Base do Personagem</h3>
+            <label>Gênero:
+                <select name="genero" required>
+                    <option value="">Selecione...</option>
+                    <option value="Feminino" data-preco="0">Feminino → Grátis</option>
+                    <option value="Masculino" data-preco="0">Masculino → Grátis</option>
+                    <option value="Neutro" data-preco="0">Neutro → Grátis</option>
+                </select>
+            </label>
+            <label>Faixa etária: <input type="text" name="idade" required placeholder="Ex: 20 anos"></label>
+           
+           <!-- Expressão -->
+<label>Expressão Facial:</label>
+<select name="expressao" required>
+    <option value="">Selecione...</option>
+    <option value="Neutra" data-preco="0">Neutra → Grátis</option>
+    <option value="Sorriso leve" data-preco="0">Sorriso leve → Grátis</option>
+    <option value="Bravo" data-preco="2">Bravo → +R$2</option>
+    <option value="Triste" data-preco="2">Triste → +R$2</option>
+    <option value="Sorriso exagerado" data-preco="3">Sorriso exagerado → +R$3</option>
+    <option value="Manual" data-preco="5">Descrever expressão → +R$5</option>
+</select>
+<input type="text" name="expressao_manual" placeholder="Descreva sua expressão" style="display:none; margin-bottom:10px;">
+
+    
+<!-- Tipo de Arte -->
+<label>Tipo de Arte:</label>
+<select name="tipo_arte" required>
+    <option value="">Selecione...</option>
+    <option value="Retrato" data-preco="2">Retrato (rosto e ombros) → +R$2</option>
+    <option value="Meio corpo" data-preco="5">Meio corpo → +R$5</option>
+    <option value="Corpo inteiro" data-preco="8">Corpo inteiro → +R$8</option>
+</select>
+            <hr>
+
+
+
+            <!-- Aparência do personagem -->
+            <h3>Tipo de Personagem</h3>
+
+            <label>Raça:</label>
+            <select name="raca" required>
+                <option value="">Selecione...</option>
+                <option value="Humano" data-preco="0">Humano → Grátis</option>
+                <option value="Humanoide felino" data-preco="3">Humanoide felino → +R$3</option>
+                <option value="Humanoide canino" data-preco="3">Humanoide canino → +R$3</option>
+                <option value="Humanoide raposa" data-preco="3">Humanoide raposa → +R$3</option>
+                <option value="Elfo" data-preco="5">Elfo → +R$5</option>
+                <option value="Orc" data-preco="5">Orc → +R$5</option>
+                <option value="Demônio" data-preco="5">Demônio → +R$5</option>
+                <option value="Anjo" data-preco="5">Anjo → +R$5</option>
+                <option value="Robô" data-preco="7">Robô → +R$7</option>
+                <option value="Cyborg" data-preco="7">Cyborg → +R$7</option>
+                <option value="Morto-vivo" data-preco="5">Morto-vivo → +R$5</option>
+                <option value="Criatura fantástica" data-preco="10">Criatura fantástica → +R$10</option>
+                <option value="Manual" data-preco="3">Descrever raça → +R$3</option>
+            </select>
+            <input type="text" name="raca_outro" placeholder="Descreva seu personagem" style="display:none; margin-bottom:10px;">
+
+<!-- Tom de pele -->
+<label>Tom de pele:</label>
+<select name="tom_pele" required>
+    <option value="">Selecione...</option>
+    <option value="Clara" data-preco="0">Clara → Grátis</option>
+    <option value="Morena" data-preco="0">Morena → Grátis</option>
+    <option value="Negra" data-preco="0">Negra → Grátis</option>
+    <option value="Pálida" data-preco="2">Pálida → +R$2</option>
+    <option value="Azul" data-preco="3">Azul → +R$3</option>
+    <option value="Verde" data-preco="3">Verde → +R$3</option>
+    <option value="Vermelho" data-preco="3">Vermelho → +R$3</option>
+    <option value="Manual" data-preco="5">Descrever cor → +R$5</option>
+</select>
+<input type="text" name="tom_pele_manual" placeholder="Ex: #BD5769" style="display:none; margin-bottom:10px;">
+
+<!-- Cor dos olhos -->
+<label>Cor dos olhos:</label>
+<select name="cor_olhos" required>
+    <option value="">Selecione...</option>
+    <option value="Castanho" data-preco="0">Castanho → Grátis</option>
+    <option value="Preto" data-preco="0">Preto → Grátis</option>
+    <option value="Azul" data-preco="0">Azul → Grátis</option>
+    <option value="Verde" data-preco="0">Verde → Grátis</option>
+    <option value="Mel" data-preco="0">Mel → Grátis</option>
+    <option value="Roxo" data-preco="3">Roxo → +R$3</option>
+    <option value="Cinza" data-preco="3">Cinza → +R$3</option>
+    <option value="Vermelho" data-preco="3">Vermelho → +R$3</option>
+    <option value="Amarelo" data-preco="3">Amarelo → +R$3</option>
+    <option value="Multicolorido" data-preco="5">Multicolorido → +R$5</option>
+    <option value="Degradê" data-preco="5">Degradê → +R$5</option>
+    <option value="Símbolos" data-preco="5">Símbolos → +R$5</option>
+    <option value="Manual" data-preco="5">Descrever cor → +R$5</option>
+</select>
+<input type="text" name="cor_olhos_manual" placeholder="Ex: #BD5769" style="display:none; margin-bottom:10px;">
+
+
+<label>Formato do rosto:</label>
+            <select name="formato_rosto" required>
+                <option value="">Selecione...</option>
+                <option value="Oval" data-preco="0">Oval → Grátis</option>
+                <option value="Redondo" data-preco="0">Redondo → Grátis</option>
+                <option value="Quadrado" data-preco="2">Quadrado → +R$2</option>
+                <option value="Triangular" data-preco="2">Triangular → +R$2</option>
+                <option value="Manual" data-preco="3">Descrever formato → +R$3</option>
+            </select>
+            <input type="text" name="formato_rosto_manual" placeholder="Descreva o formato do rosto" style="display:none; margin-bottom:10px;">
+
+            <!-- Mechas -->
+<label>Mechas:</label>
+<select name="mechas" required>
+    <option value="">Selecione...</option>
+    <option value="Sem mechas" data-preco="0">Sem mechas → Grátis</option>
+    <option value="Mecha simples" data-preco="3">Mecha simples no rosto  → +R$3</option>
+    <option value="Mecha colorida" data-preco="3">Mecha vitiligo → +R$3</option>
+    <option value="Manual" data-preco="5">Descrever mecha → +R$5</option>
+</select>
+<input type="text" name="mechas_manual" placeholder="Descreva a cor da mecha" style="display:none; margin-bottom:10px;">
+
+<!-- Marcas no corpo/rosto -->
+<label>Marcas no corpo / rosto:</label>
+<select name="marcas" required>
+    <option value="">Selecione...</option>
+    <option value="Nada" data-preco="0">Nada → Grátis</option>
+    <option value="Pinta" data-preco="1">Pinta aleatoria → +R$1</option>
+    <option value="Cicatriz" data-preco="2">Cicatriz aleatoria → +R$2</option>
+    <option value="Tatuagem simples" data-preco="3">Tatuagem simples aleatoria → +R$3</option>
+    <option value="Tatuagem grande" data-preco="5">Ferida aleatoria → +R$5</option>
+    <option value="Queimadura" data-preco="5">Queimadura aleatoria → +R$5</option>
+    <option value="Manual" data-preco="5">Descrever marca → +R$5</option>
+</select>
+<input type="text" name="marcas_manual" placeholder="Descreva suas marcas" style="display:none; margin-bottom:10px;">
+<hr>
+
+            <!-- Aparência do personagem -->
+            <h3>Pelos do Personagem</h3>
+
+            <label>Tipo de cabelo:</label>
+            <select name="tipo_cabelo" required>
+                <option value="">Selecione...</option>
+                <option value="Liso" data-preco="0">Liso → Grátis</option>
+                <option value="Ondulado" data-preco="0">Ondulado → Grátis</option>
+                <option value="Cacheado" data-preco="3">Cacheado → +R$3</option>
+                <option value="Crespo" data-preco="3">Crespo → +R$3</option>
+                <option value="Manual" data-preco="5">Descrever Estilizado → +R$5</option>
+            </select>
+            <input type="text" name="tipo_cabelo_manual" placeholder="Descreva o tipo de cabelo" style="display:none; margin-bottom:10px;">
+
+            <label>Comprimento do cabelo:</label>
+            <select name="comprimento_cabelo" required>
+                <option value="">Selecione...</option>
+                <option value="Careca" data-preco="2">Careca → +R$2</option>
+                <option value="Curto" data-preco="0">Curto → Grátis</option>
+                <option value="Médio" data-preco="3">Médio → +R$3</option>
+                <option value="Longo" data-preco="5">Longo → +R$5</option>
+                <option value="Muito longo" data-preco="7">Muito longo → +R$7</option>
+            </select>
+
+            <label>Penteado:</label>
+            <select name="penteado" required>
+                <option value="">Selecione...</option>
+                <option value="Solto" data-preco="0">Solto → Grátis</option>
+                <option value="Coque" data-preco="3">Coque → +R$3</option>
+                <option value="Rabo de cavalo" data-preco="3">Rabo de cavalo → +R$3</option>
+                <option value="Tranças" data-preco="4">Tranças → +R$4</option>
+                <option value="Manual" data-preco="5">Estilizar penteado → +R$5</option>
+            </select>
+            <input type="text" name="penteado_manual" placeholder="Descreva o penteado" style="display:none; margin-bottom:10px;">
+
+            <label>Franja:</label>
+            <select name="franja" required>
+                <option value="">Selecione...</option>
+                <option value="Sem franja" data-preco="0">Sem franja → Grátis</option>
+                <option value="Franja reta" data-preco="2">Franja reta → +R$2</option>
+                <option value="Franja lateral" data-preco="2">Franja lateral → +R$2</option>
+                <option value="Manual" data-preco="3">Descrever franja → +R$3</option>
+            </select>
+            <input type="text" name="franja_manual" placeholder="Descreva a franja" style="display:none; margin-bottom:10px;">
+
+            <!-- Cor do cabelo -->
+            <label>Cor do cabelo:</label>
+            <select name="cor_cabelo" required>
+                <option value="">Selecione...</option>
+                <option value="Preto" data-preco="0">Preto → Grátis</option>
+                <option value="Castanho" data-preco="0">Castanho → Grátis</option>
+                <option value="Loiro" data-preco="3">Loiro → +R$3</option>
+                <option value="Ruivo" data-preco="3">Ruivo → +R$3</option>
+                <option value="Branco" data-preco="4">Branco → +R$4</option>
+                <option value="Prateado" data-preco="4">Prateado → +R$4</option>
+                <option value="Azul" data-preco="5">Azul → +R$5</option>
+                <option value="Verde" data-preco="5">Verde → +R$5</option>
+                <option value="Roxo" data-preco="5">Roxo → +R$5</option>
+                <option value="Rosa" data-preco="5">Rosa → +R$5</option>
+                <option value="Multicolorido" data-preco="7">Multicolorido → +R$7</option>
+                <option value="Degradê" data-preco="7">Degradê → +R$7</option>
+                <option value="Manual" data-preco="5">Descrever cor manualmente → +R$5</option>
+            </select>
+            <input type="text" name="cor_cabelo_manual" placeholder="Ex: #BD5769" style="display:none; margin-bottom:10px;">
+
+
+<!-- Barba -->
+<label>Barba:</label>
+<select name="barba" required>
+    <option value="">Selecione...</option>
+    <option value="Sem barba" data-preco="0">Sem barba → Grátis</option>
+    <option value="Barba rala" data-preco="2">Barba rala → +R$2</option>
+    <option value="Barba cheia" data-preco="3">Barba cheia → +R$3</option>
+    <option value="Manual" data-preco="5">Descrever barba → +R$5</option>
+</select>
+<input type="text" name="barba_manual" placeholder="Descreva a barba" style="display:none; margin-bottom:10px;">
+
+<hr>
+
+            <!-- Aparência do personagem -->
+            <h3>Roupas do Personagem</h3>
+
+<!-- Roupas -->
+<label>Tipo de roupa:</label>
+<select name="roupas" id="roupas" required>
+    <option value="">Selecione...</option>
+    <option value="Casual" data-preco="0">Casual → Grátis</option>
+    <option value="Social" data-preco="3">Social → +R$3</option>
+    <option value="Fantasia" data-preco="5">Fantasia → +R$5</option>
+    <option value="Manual" data-preco="5">Descrever tipo roupa → +R$5</option>
+</select>
+<input type="text" name="roupas_manual" placeholder="Descreva o tipo de roupa" style="display:none; margin-bottom:10px;">
+
+<!-- Cores da roupa -->
+<label>Cores da roupa:</label>
+<input type="text" name="cores_roupa" placeholder="Ex: Azul, Vermelho" required style="margin-bottom:10px;">
+
+<!-- Acessórios / Detalhes Extras -->
+<label>Acessórios / Detalhes Extras:</label>
+<select name="acessorios" id="acessorios" required>
+    <option value="">Selecione...</option>
+    <option value="Nenhum" data-preco="0">Nenhum → Grátis</option>
+    <option value="Brincos" data-preco="2">Brincos → +R$2</option>
+    <option value="Colar" data-preco="2">Colar → +R$2</option>
+    <option value="Pulseira" data-preco="2">Pulseira → +R$2</option>
+    <option value="Manual" data-preco="5">Descrever acessório → +R$5</option>
+</select>
+<input type="text" name="acessorios_manual" placeholder="Descreva o acessório" style="display:none; margin-bottom:10px;">
+<hr>
+
+<!-- Estilo Artístico -->
+<h3>Estilo de Desenho do Personagem</h3>
+
+<label>Estilo Artístico:</label>
+<select name="estilo_artistico" id="estilo_artistico" required>
+    <option value="">Selecione...</option>
+    <option value="Chibi" data-preco="50">Chibi → R$50</option>
+    <option value="ChibiEmote" data-preco="50">Chibi para emote → R$50</option>
+    <option value="Anime" data-preco="80">Anime → R$80</option>
+    <option value="Cartoon" data-preco="70">Cartoon → R$70</option>
+    <option value="Pixel" data-preco="30">Pixel Arte → R$30</option>
+    <option value="HQ" data-preco="65">Cartoon estilo HQ → R$65</option>
+    <option value="Gamer" data-preco="70">Gamer → R$70</option>
+    <option value="Flat" data-preco="20">Flat Design → R$20</option>
+</select>
+
+<!-- Poses Extras -->
+<div id="extraDiv">
+  <label for="poses">
+    Você quer adicionar mais poses desse personagem?  
+    Escolha o tipo artístico selecionado acima:
+  </label>
+  <select id="poses">
+    <option value="">Não adicionar poses</option>
+    <option value="ChibiEmote" data-preco="75">Adicionar 5 poses Chibi para emote → +R$75</option>
+    <option value="Anime" data-preco="120">Adicionar 3 poses Anime → +R$120</option>
+    <option value="Cartoon" data-preco="110">Adicionar 3 poses Cartoon → +R$110</option>
+    <option value="Pixel" data-preco="20">Adicionar 3 poses Pixel Arte → +R$20</option>
+    <option value="HQ" data-preco="85">Adicionar 3 poses Cartoon estilo HQ → +R$85</option>
+  </select>
+
+  <!-- Input de descrição -->
+  <input type="text" id="descricaoPoses" name="roupas_manual" placeholder="Descreva todas as poses e expreções" style="display:none; margin-top:10px;">
+</div>
+
+<script>
+  const posesSelect = document.getElementById('poses');
+  const descricaoInput = document.getElementById('descricaoPoses');
+
+  posesSelect.addEventListener('change', () => {
+    if (posesSelect.value !== "") {
+      descricaoInput.style.display = "block";
+    } else {
+      descricaoInput.style.display = "none";
+      descricaoInput.value = ""; // limpa se escolher "Não adicionar poses"
+    }
+  });
+</script>
+<hr>
+
+<!-- Estilo Artístico -->
+<h3>Fundo da imagem</h3>
+<select name="fundo" required>
+    <option value="">Selecione...</option>
+    <option value="PNG transparente" data-preco="0">PNG transparente → Grátis</option>
+    <option value="Fundo 1 cor" data-preco="0">Fundo 1 cor → Grátis</option>
+    <option value="Fundo degradê" data-preco="2">Fundo degradê → +R$2</option>
+    <option value="Manual" data-preco="10">Descrever manualmente → +R$10</option>
+</select>
+<input type="text" name="fundo_manual" placeholder="Descreva o fundo" style="display:none; margin-bottom:10px;">
+    <hr>
+
+<!-- Extras avançados -->
+<h3>Extras Avançados (pode selecionar mais de uma)</h3>
+<label><input type="checkbox" name="efeito_magico" data-preco="3"> Efeitos mágicos → +R$3</label>
+<label><input type="checkbox" name="aura_elemental" data-preco="5"> Aura elemental → +R$5</label>
+<label><input type="checkbox" name="poses_dinamicas" data-preco="3"> Poses dinâmicas → +R$3</label>
+<label><input type="checkbox" name="objetos_mao" data-preco="2"> Objetos na mão → +R$2</label>
+<label><input type="checkbox" name="itens_colecao" data-preco="2"> Itens de coleção → +R$2</label>
+<label><input type="checkbox" name="efeitos_iluminacao" data-preco="3"> Efeitos de iluminação → +R$3</label>
+<label><input type="checkbox" name="logo_integrado" data-preco="5"> Efeitos 3D → +R$5</label>
+<label><input type="checkbox" name="criar_logo" data-preco="10"> Criar logo Marca junto → +R$10</label>
+<label><input type="checkbox" name="personagem_animado" data-preco="20"> Personagem animado GIF → +R$20</label>
+<hr>
+            <!-- Serviço expresso -->
+<label style="display: block; margin: 10px 0; font-weight: bold; color: #d46aff;">
+    <input type="checkbox" id="servicoExpresso" data-extra="0.1">
+    ATIVAR PRODUÇÃO EXPRESSA? (+10% do valor total)
+</label>
+<hr2>
+      </div>
+
+<!-- Preço total com desconto -->
+<div id="precoTotal" style="font-size:1.3rem; font-weight:bold; margin-bottom:10px; padding:10px; border:2px solid #d46aff; border-radius:15px; background:#f8e6ff;">
+    Preço atual: <span id="precoOriginal">R$ 0</span> 
+    <span id="precoDesconto" style="color:red; text-decoration:line-through;"></span>
+    <div id="precoComDesconto" style="margin-top:5px; font-weight:bold; color:#d46aff;"></div>
+</div>
+
+<!-- Cupom de desconto -->
+<div id="cupomContainer" style="margin-bottom:15px; padding:15px; border:2px solid #d46aff; border-radius:15px; background:#f8e6ff;">
+    <label for="cupomInput" style="font-weight:bold;">Insira seu cupom:</label>
+    <input type="text" id="cupomInput" placeholder="Digite seu cupom aqui" style="width:100%; padding:10px; margin-top:5px; border-radius:10px; border:1px solid #ccc;">
+    <button type="button" id="aplicarCupom" style="margin-top:10px; padding:10px 15px; border:none; border-radius:10px; background:#d46aff; color:#fff; cursor:pointer;">Aplicar cupom</button>
+    <small style="display:block; margin-top:5px; color:#555;">*Apenas um cupom por vez.</small>
+</div>
+
+<!-- Botão enviar pedido -->
+<button type="button" id="enviarPedido" style="width:100%; padding:18px; font-size:1.3rem; font-weight:bold; color:#fff; background:linear-gradient(135deg, #ff6a95, #d46aff, #8e2de2); border:none; border-radius:15px; cursor:pointer; margin-top:10px; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
+    ENVIAR PEDIDO
+</button>
+
+</form>
+</div>
+</div>
+
+<!-- Paleta de cor RGB fixa -->
+<div id="colorPickerContainer">
+    <div id="colorPickerTitle">CRIE SUA COR AQUI!</div>
+    <input type="color" id="colorInput">
+    <input type="text" id="colorValue" readonly>
+    <button id="copyColor">Copiar</button>
+</div>
+
+<!-- Coloque TODO o JS completo AQUI, substituindo o seu script atual -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // ==============================
+    // Mostrar campos manuais
+    // ==============================
+    const camposManuais = [
+        {select: 'raca', manual: 'raca_outro'},
+        {select: 'formato_rosto', manual: 'formato_rosto_manual'},
+        {select: 'tipo_cabelo', manual: 'tipo_cabelo_manual'},
+        {select: 'penteado', manual: 'penteado_manual'},
+        {select: 'franja', manual: 'franja_manual'},
+        {select: 'barba', manual: 'barba_manual'},
+        {select: 'cor_cabelo', manual: 'cor_cabelo_manual'},
+        {select: 'mechas', manual: 'mechas_manual'},
+        {select: 'marcas', manual: 'marcas_manual'},
+        {select: 'cor_olhos', manual: 'cor_olhos_manual'},
+        {select: 'expressao', manual: 'expressao_manual'},
+        {select: 'tom_pele', manual: 'tom_pele_manual'},
+        {select: 'roupas', manual: 'roupas_manual'},
+        {select: 'acessorios', manual: 'acessorios_manual'},
+        {select: 'fundo', manual: 'fundo_manual'}
+    ];
+
+    camposManuais.forEach(c => {
+        const sel = document.querySelector(`select[name="${c.select}"]`);
+        const man = document.querySelector(`input[name="${c.manual}"]`);
+        if(sel && man){
+            sel.addEventListener('change', function() {
+                if(this.value.toLowerCase() === "manual" || this.value.toLowerCase() === "outro"){
+                    man.style.display = 'block';
+                } else {
+                    man.style.display = 'none';
+                    man.value = "";
+                }
+                atualizarPreco();
+            });
+        }
+    });
+
+    // ==============================
+    // Cupons de desconto
+    // ==============================
+    const cupons = {
+        "KERO1OFF_SK": 1, "KERO2OFF_AN": 2, "KERO3OFF_MG": 3, "KERO4OFF_CH": 4,
+        "KERO5OFF_PS": 5, "KERO6OFF_AR": 6, "KERO7OFF_CL": 7, "KERO8OFF_LN": 8,
+        "KERO9OFF_CN": 9, "KERO10OFF_DS": 10, "KERO11OFF_PL": 11, "KERO12OFF_TL": 12,
+        "KERO13OFF_CV": 13, "KERO14OFF_SB": 14, "KERO15OFF_FN": 15, "KERO16OFF_AT": 16,
+        "KERO17OFF_PT": 17, "KERO18OFF_IL": 18, "KERO19OFF_HQ": 19, "KERO20OFF_CH": 20
+    };
+
+    let cupomAplicado = null;
+    const inputCupom = document.getElementById("cupomInput");
+    const btnAplicarCupom = document.getElementById("aplicarCupom");
+
+    btnAplicarCupom.addEventListener("click", function() {
+    const codigo = inputCupom.value.trim().toUpperCase();
+    if(!codigo) return;
+    if(cupons[codigo]){
+        cupomAplicado = {codigo, desconto: cupons[codigo]};
+        alert(`Cupom aplicado! Desconto de ${cupons[codigo]}%`);
+    } else {
+        cupomAplicado = null;
+        alert("Cupom inválido.");
+    }
+    atualizarPreco();
+});
+
+
+    // ==============================
+    // Cálculo de preço completo
+    // ==============================
+    function atualizarPreco(){
+        let total = 0;
+
+        // Somar selects
+        document.querySelectorAll('select').forEach(select => {
+            const opcao = select.options[select.selectedIndex];
+            if(opcao) total += parseFloat(opcao.dataset.preco || 0);
+        });
+
+        // Somar checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+            if(chk.checked) total += parseFloat(chk.dataset.preco || 0);
+        });
+
+        // Serviço expresso (10%)
+        const servicoExpresso = document.getElementById("servicoExpresso");
+        if(servicoExpresso && servicoExpresso.checked){
+            total += total * 0.10;
+        }
+
+        const precoContainer = document.getElementById('precoTotal');
+
+        if(cupomAplicado){
+            const desconto = total * (cupomAplicado.desconto / 100);
+            const precoComDesconto = total - desconto;
+            precoContainer.innerHTML = `
+                Preço atual: R$ ${total.toFixed(2)}
+                <br>
+                <span style="text-decoration: line-through; color: red;">R$ ${total.toFixed(2)}</span>
+                &nbsp;&nbsp;
+                <span>Preço com desconto: R$ ${precoComDesconto.toFixed(2)}</span>
+            `;
+        } else {
+            precoContainer.innerHTML = `Preço atual: R$ ${total.toFixed(2)}`;
+        }
+    }
+
+    document.querySelectorAll('select, input[type="checkbox"]').forEach(el => {
+        el.addEventListener('change', atualizarPreco);
+    });
+    atualizarPreco();
+
+    // ==============================
+// Envio de pedido via WhatsApp
+// ==============================
+document.getElementById('enviarPedido').addEventListener('click', function() {
+    const form = document.getElementById('personagemForm');
+    const formData = new FormData(form);
+    let mensagem = "*📋 Formulário de Encomenda – Personagem Digital*\n\n";
+
+    // Adiciona todos os campos do formulário
+    for (let [key, value] of formData.entries()) {
+        if(value) mensagem += `*${key.replace(/_/g, ' ')}:* ${value}\n`;
+    }
+
+    // Pega os preços exibidos na tela
+    const precoContainer = document.getElementById('precoTotal');
+    const precoAtual = precoContainer.querySelector('#precoOriginal')?.innerText || '';
+    const precoComDesconto = precoContainer.querySelector('#precoComDesconto')?.innerText || '';
+
+    mensagem += `\n*Preço atual:* ${precoAtual}`;
+    if(precoComDesconto) {
+        mensagem += `\n*Preço com desconto:* ${precoComDesconto}`;
+    }
+
+    const numeroZap = "+5521978046832"; // número do WhatsApp
+    const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
+    window.open(url, '_blank');
+});
+
+
+    // ==============================
+    // Paleta de cores
+    // ==============================
+    const container = document.getElementById("colorPickerContainer");
+    if (container) {
+        const colorInput = document.getElementById("colorInput");
+        const colorValue = document.getElementById("colorValue");
+        const copyBtn = document.getElementById("copyColor");
+
+        colorValue.value = colorInput.value;
+        colorInput.addEventListener("input", () => {
+            colorValue.value = colorInput.value;
+        });
+
+        copyBtn.addEventListener("click", () => {
+            navigator.clipboard.writeText(colorValue.value);
+            copyBtn.textContent = "Copiado!";
+            setTimeout(() => copyBtn.textContent = "Copiar", 1500);
+        });
+    }
+
+});
+</script>
