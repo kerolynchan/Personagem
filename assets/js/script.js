@@ -94,12 +94,13 @@ document.addEventListener("DOMContentLoaded", function() {
             const desconto = total * (cupomAplicado.desconto / 100);
             const precoComDesconto = total - desconto;
             precoContainer.innerHTML = `
-                Preço atual: R$ ${total.toFixed(2)}
-                <br>
-                <span style="text-decoration: line-through; color: red;">R$ ${total.toFixed(2)}</span>
-                &nbsp;&nbsp;
-                <span>Preço com desconto: R$ ${precoComDesconto.toFixed(2)}</span>
-            `;
+               precoContainer.innerHTML = `
+    <span id="precoNormal">Preço atual: R$ ${total.toFixed(2)}</span><br>
+    <span id="precoRiscado" style="text-decoration: line-through; color: red;">R$ ${total.toFixed(2)}</span>
+    &nbsp;&nbsp;
+    <span id="precoComDesconto">Preço com desconto: R$ ${precoComDesconto.toFixed(2)}</span>
+`;
+
         } else {
             precoContainer.innerHTML = `Preço atual: R$ ${total.toFixed(2)}`;
         }
@@ -122,8 +123,12 @@ document.addEventListener("DOMContentLoaded", function() {
             if(value) mensagem += `*${key.replace(/_/g, ' ')}:* ${value}\n`;
         }
 
-        const precoAtual = document.getElementById('precoTotal').innerText;
-        mensagem += `\n*${precoAtual}*`;
+        const precoNormal = document.getElementById("precoNormal")?.innerText || "";
+const precoComDesconto = document.getElementById("precoComDesconto")?.innerText || "";
+
+if (precoNormal) mensagem += `\n*${precoNormal}*`;
+if (precoComDesconto) mensagem += `\n*${precoComDesconto}*`;
+
 
         const numeroZap = "+5521978046832";
         const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
