@@ -71,69 +71,64 @@ document.addEventListener("DOMContentLoaded", function() {
     // ==============================
     // Calcular preço
     // ==============================
-    function atualizarPreco(){
-        let total = 0;
+    function atualizarPreco() {
+    let total = 0;
 
-        document.querySelectorAll('select').forEach(select => {
-            const opcao = select.options[select.selectedIndex];
-            if(opcao) total += parseFloat(opcao.dataset.preco || 0);
-        });
+    document.querySelectorAll('select').forEach(select => {
+        const opcao = select.options[select.selectedIndex];
+        if(opcao) total += parseFloat(opcao.dataset.preco || 0);
+    });
 
-        document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-            if(chk.checked) total += parseFloat(chk.dataset.preco || 0);
-        });
+    document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+        if(chk.checked) total += parseFloat(chk.dataset.preco || 0);
+    });
 
-        const servicoExpresso = document.getElementById("servicoExpresso");
-        if(servicoExpresso && servicoExpresso.checked){
-            total += total * 0.10;
-        }
-
-        const precoContainer = document.getElementById('precoTotal');
-
-        if(cupomAplicado){
-            const desconto = total * (cupomAplicado.desconto / 100);
-            const precoComDesconto = total - desconto;
-            precoContainer.innerHTML = `
-               precoContainer.innerHTML = `
-    <span id="precoNormal">Preço atual: R$ ${total.toFixed(2)}</span><br>
-    <span id="precoRiscado" style="text-decoration: line-through; color: red;">R$ ${total.toFixed(2)}</span>
-    &nbsp;&nbsp;
-    <span id="precoComDesconto">Preço com desconto: R$ ${precoComDesconto.toFixed(2)}</span>
-`;
-
-        } else {
-            precoContainer.innerHTML = `Preço atual: R$ ${total.toFixed(2)}`;
-        }
+    const servicoExpresso = document.getElementById("servicoExpresso");
+    if(servicoExpresso && servicoExpresso.checked){
+        total += total * 0.10;
     }
 
-    document.querySelectorAll('select, input[type="checkbox"]').forEach(el => {
-        el.addEventListener('change', atualizarPreco);
-    });
-    atualizarPreco();
+    const precoOriginal = total;
+    let precoComDesc = total;
+
+    if(cupomAplicado){
+        precoComDesc = total - (total * (cupomAplicado.desconto / 100));
+    }
+
+    // Atualiza a tela
+    document.getElementById("precoOriginal").innerText = `R$ ${total.toFixed(2)}`;
+    document.getElementById("precoDesconto").innerText = cupomAplicado ? `R$ ${total.toFixed(2)}` : '';
+    document.getElementById("precoComDesconto").innerText = cupomAplicado ? `R$ ${precoComDesc.toFixed(2)}` : '';
+
+    // Retorna os valores para usar no WhatsApp
+    return { precoOriginal, precoComDesc };
+}
+
 
     // ==============================
     // Envio do pedido via WhatsApp
     // ==============================
     document.getElementById('enviarPedido').addEventListener('click', function() {
-        const form = document.getElementById('personagemForm');
-        const formData = new FormData(form);
-        let mensagem = "*📋 Formulário de Encomenda – Personagem Digital*\n\n";
+    const form = document.getElementById('personagemForm');
+    const formData = new FormData(form);
+    let mensagem = "*📋 Formulário de Encomenda – Personagem Digital*\n\n";
 
-        for (let [key, value] of formData.entries()) {
-            if(value) mensagem += `*${key.replace(/_/g, ' ')}:* ${value}\n`;
-        }
+    for (let [key, value] of formData.entries()) {
+        if(value) mensagem += `*${key.replace(/_/g, ' ')}:* ${value}\n`;
+    }
 
-        const precoNormal = document.getElementById("precoNormal")?.innerText || "";
-const precoComDesconto = document.getElementById("precoComDesconto")?.innerText || "";
+    // Pega os valores diretamente do cálculo
+    const { precoOriginal, precoComDesc } = atualizarPreco();
 
-if (precoNormal) mensagem += `\n*${precoNormal}*`;
-if (precoComDesconto) mensagem += `\n*${precoComDesconto}*`;
+    mensagem += `\n*Preço atual:* R$ ${precoOriginal.toFixed(2)}`;
+    if(cupomAplicado) {
+        mensagem += `\n*Preço com desconto:* R$ ${precoComDesc.toFixed(2)}`;
+    }
 
-
-        const numeroZap = "+5521978046832";
-        const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
-        window.open(url, '_blank');
-    });
+    const numeroZap = "+5521978046832"; 
+    const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
+    window.open(url, '_blank');
+});
 
     // ==============================
     // Paleta de cores
