@@ -111,61 +111,24 @@ document.addEventListener("DOMContentLoaded", function() {
     atualizarPreco();
 
     // ==============================
-// Envio de pedido via WhatsApp
-// ==============================
-document.getElementById('enviarPedido').addEventListener('click', function() {
-    const form = document.getElementById('personagemForm');
-    const formData = new FormData(form);
-    let mensagem = "*📋 Formulário de Encomenda – Personagem Digital*\n\n";
-
-    // Adiciona todos os campos do formulário
-    for (let [key, value] of formData.entries()) {
-        if(value) mensagem += `*${key.replace(/_/g, ' ')}:* ${value}\n`;
-    }
-
+    // Envio do pedido via WhatsApp
     // ==============================
-    // Pegar preços diretamente do cálculo
-    // ==============================
-    let total = 0;
+    document.getElementById('enviarPedido').addEventListener('click', function() {
+        const form = document.getElementById('personagemForm');
+        const formData = new FormData(form);
+        let mensagem = "*📋 Formulário de Encomenda – Personagem Digital*\n\n";
 
-    // Soma selects
-    document.querySelectorAll('select').forEach(select => {
-        const opcao = select.options[select.selectedIndex];
-        if(opcao) total += parseFloat(opcao.dataset.preco || 0);
+        for (let [key, value] of formData.entries()) {
+            if(value) mensagem += `*${key.replace(/_/g, ' ')}:* ${value}\n`;
+        }
+
+        const precoAtual = document.getElementById('precoTotal').innerText;
+        mensagem += `\n*${precoAtual}*`;
+
+        const numeroZap = "+5521978046832";
+        const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
+        window.open(url, '_blank');
     });
-
-    // Soma checkboxes
-    document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-        if(chk.checked) total += parseFloat(chk.dataset.preco || 0);
-    });
-
-    // Serviço expresso (10%)
-    const servicoExpresso = document.getElementById("servicoExpresso");
-    if(servicoExpresso && servicoExpresso.checked){
-        total += total * 0.10;
-    }
-
-    // Calcula preço com desconto se houver cupom
-    let precoAtual = total.toFixed(2);
-    let precoComDesconto = precoAtual;
-
-    if(cupomAplicado){
-        const desconto = total * (cupomAplicado.desconto / 100);
-        precoComDesconto = (total - desconto).toFixed(2);
-    }
-
-    // Adiciona preço na mensagem
-    mensagem += `\n*Preço atual:* R$ ${precoAtual}`;
-    if(cupomAplicado){
-        mensagem += `\n*Preço com desconto:* R$ ${precoComDesconto}`;
-    }
-
-    // Abre WhatsApp
-    const numeroZap = "+5521978046832"; // número do WhatsApp
-    const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
-    window.open(url, '_blank');
-});
-
 
     // ==============================
     // Paleta de cores
@@ -228,3 +191,4 @@ document.getElementById('enviarPedido').addEventListener('click', function() {
 
     atualizarEstiloArtistico();
 });
+
