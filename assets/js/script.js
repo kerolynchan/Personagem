@@ -123,22 +123,44 @@ document.getElementById('enviarPedido').addEventListener('click', function() {
         if(value) mensagem += `*${key.replace(/_/g, ' ')}:* ${value}\n`;
     }
 
-    // Pega os preços exibidos na tela
-    const precoContainer = document.getElementById('precoTotal');
-    let precoAtual = '';
-    let precoComDesconto = '';
+    // ==============================
+    // Pegar preços diretamente do cálculo
+    // ==============================
+    let total = 0;
 
-    if(precoContainer){
-        precoAtual = precoContainer.querySelector('#precoOriginal')?.innerText.trim() || '';
-        precoComDesconto = precoContainer.querySelector('#precoComDesconto')?.innerText.trim() || '';
+    // Soma selects
+    document.querySelectorAll('select').forEach(select => {
+        const opcao = select.options[select.selectedIndex];
+        if(opcao) total += parseFloat(opcao.dataset.preco || 0);
+    });
+
+    // Soma checkboxes
+    document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+        if(chk.checked) total += parseFloat(chk.dataset.preco || 0);
+    });
+
+    // Serviço expresso (10%)
+    const servicoExpresso = document.getElementById("servicoExpresso");
+    if(servicoExpresso && servicoExpresso.checked){
+        total += total * 0.10;
+    }
+
+    // Calcula preço com desconto se houver cupom
+    let precoAtual = total.toFixed(2);
+    let precoComDesconto = precoAtual;
+
+    if(cupomAplicado){
+        const desconto = total * (cupomAplicado.desconto / 100);
+        precoComDesconto = (total - desconto).toFixed(2);
     }
 
     // Adiciona preço na mensagem
-    if(precoAtual) mensagem += `\n*Preço atual:* ${precoAtual}`;
-    if(precoComDesconto && precoComDesconto !== precoAtual) {
-        mensagem += `\n*Preço com desconto:* ${precoComDesconto}`;
+    mensagem += `\n*Preço atual:* R$ ${precoAtual}`;
+    if(cupomAplicado){
+        mensagem += `\n*Preço com desconto:* R$ ${precoComDesconto}`;
     }
 
+    // Abre WhatsApp
     const numeroZap = "+5521978046832"; // número do WhatsApp
     const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
     window.open(url, '_blank');
