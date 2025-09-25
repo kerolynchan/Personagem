@@ -123,11 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const precoAtual = document.getElementById('precoTotal').innerText;
-        mensagem += `Preço atual: R$ ${total.toFixed(2)}`;
-
-        const precoAtual = document.getElementById('precoTotal').innerText;
-        mensagem += `Preço com desconto: R$ ${precoComDesconto.toFixed(2)}`;
-
+        mensagem += `\n*${precoAtual}*`;
 
         const numeroZap = "+5521978046832";
         const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
@@ -195,4 +191,3 @@ document.addEventListener("DOMContentLoaded", function() {
 
     atualizarEstiloArtistico();
 });
-
