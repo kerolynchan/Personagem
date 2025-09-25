@@ -449,49 +449,52 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // ==============================
-    // Cálculo de preço completo
-    // ==============================
-    function atualizarPreco(){
-        let total = 0;
+// Cálculo de preço completo
+// ==============================
+function atualizarPreco(){
+    let total = 0;
 
-        // Somar selects
-        document.querySelectorAll('select').forEach(select => {
-            const opcao = select.options[select.selectedIndex];
-            if(opcao) total += parseFloat(opcao.dataset.preco || 0);
-        });
+    // Somar selects
+    document.querySelectorAll('select').forEach(select => {
+        const opcao = select.options[select.selectedIndex];
+        if(opcao) total += parseFloat(opcao.dataset.preco || 0);
+    });
 
-        // Somar checkboxes
-        document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-            if(chk.checked) total += parseFloat(chk.dataset.preco || 0);
-        });
+    // Somar checkboxes
+    document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+        if(chk.checked) total += parseFloat(chk.dataset.preco || 0);
+    });
 
-        // Serviço expresso (10%)
-        const servicoExpresso = document.getElementById("servicoExpresso");
-        if(servicoExpresso && servicoExpresso.checked){
-            total += total * 0.10;
-        }
-
-        const precoContainer = document.getElementById('precoTotal');
-
-        if(cupomAplicado){
-            const desconto = total * (cupomAplicado.desconto / 100);
-            const precoComDesconto = total - desconto;
-            precoContainer.innerHTML = `
-                Preço atual: R$ ${total.toFixed(2)}
-                <br>
-                <span style="text-decoration: line-through; color: red;">R$ ${total.toFixed(2)}</span>
-                &nbsp;&nbsp;
-                <span>Preço com desconto: R$ ${precoComDesconto.toFixed(2)}</span>
-            `;
-        } else {
-            precoContainer.innerHTML = `Preço atual: R$ ${total.toFixed(2)}`;
-        }
+    // Serviço expresso (10%)
+    const servicoExpresso = document.getElementById("servicoExpresso");
+    if(servicoExpresso && servicoExpresso.checked){
+        total += total * 0.10;
     }
 
-    document.querySelectorAll('select, input[type="checkbox"]').forEach(el => {
-        el.addEventListener('change', atualizarPreco);
-    });
-    atualizarPreco();
+    // Atualiza os elementos já existentes
+    const precoOriginal = document.getElementById("precoOriginal");
+    const precoDesconto = document.getElementById("precoDesconto");
+    const precoComDesconto = document.getElementById("precoComDesconto");
+
+    if(cupomAplicado){
+        const desconto = total * (cupomAplicado.desconto / 100);
+        const precoComDesc = total - desconto;
+
+        precoOriginal.innerText = `R$ ${total.toFixed(2)}`;
+        precoDesconto.innerText = `R$ ${total.toFixed(2)}`;
+        precoComDesconto.innerText = `R$ ${precoComDesc.toFixed(2)}`;
+    } else {
+        precoOriginal.innerText = `R$ ${total.toFixed(2)}`;
+        precoDesconto.innerText = ``;
+        precoComDesconto.innerText = ``;
+    }
+}
+
+// Observadores
+document.querySelectorAll('select, input[type="checkbox"]').forEach(el => {
+    el.addEventListener('change', atualizarPreco);
+});
+atualizarPreco();
 
     // ==============================
 // Envio de pedido via WhatsApp
