@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
         "KERO13OFF_CV": 13, "KERO14OFF_SB": 14, "KERO15OFF_FN": 15, "KERO16OFF_AT": 16,
         "KERO17OFF_PT": 17, "KERO18OFF_IL": 18, "KERO19OFF_HQ": 19, "KERO20OFF_CH": 20
     };
+
     let cupomAplicado = null;
 
     const inputCupom = document.getElementById("cupomInput");
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     btnAplicarCupom.addEventListener("click", function() {
         const codigo = inputCupom.value.trim().toUpperCase();
+        if(!codigo) return;
         if(cupomAplicado){
             alert("Apenas um cupom pode ser aplicado por vez.");
             return;
@@ -69,25 +71,29 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // ==============================
-    // Calcular preço
+    // Atualizar preço
     // ==============================
     function atualizarPreco(){
         let total = 0;
 
+        // Soma selects
         document.querySelectorAll('select').forEach(select => {
             const opcao = select.options[select.selectedIndex];
             if(opcao) total += parseFloat(opcao.dataset.preco || 0);
         });
 
+        // Soma checkboxes
         document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
             if(chk.checked) total += parseFloat(chk.dataset.preco || 0);
         });
 
+        // Serviço expresso
         const servicoExpresso = document.getElementById("servicoExpresso");
         if(servicoExpresso && servicoExpresso.checked){
             total += total * 0.10;
         }
 
+        // Atualiza preço na tela
         const precoContainer = document.getElementById('precoTotal');
 
         if(cupomAplicado){
@@ -111,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
     atualizarPreco();
 
     // ==============================
-    // Envio do pedido via WhatsApp
+    // Envio de pedido via WhatsApp
     // ==============================
     document.getElementById('enviarPedido').addEventListener('click', function() {
         const form = document.getElementById('personagemForm');
@@ -122,10 +128,15 @@ document.addEventListener("DOMContentLoaded", function() {
             if(value) mensagem += `*${key.replace(/_/g, ' ')}:* ${value}\n`;
         }
 
-        const precoAtual = document.getElementById('precoTotal').innerText;
-        mensagem += `\n*${precoAtual}*`;
+        // Adiciona preços
+        const precoContainer = document.getElementById('precoTotal');
+        const precoAtual = precoContainer.innerText.split('\n')[0] || '';
+        const precoComDesconto = precoContainer.innerText.includes("Preço com desconto") ? precoContainer.innerText.split('\n')[2] : '';
 
-        const numeroZap = "+5521978046832";
+        mensagem += `\n*${precoAtual}*`;
+        if(precoComDesconto) mensagem += `\n*${precoComDesconto}*`;
+
+        const numeroZap = "+5521978046832"; 
         const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
         window.open(url, '_blank');
     });
@@ -133,14 +144,16 @@ document.addEventListener("DOMContentLoaded", function() {
     // ==============================
     // Paleta de cores
     // ==============================
-    const container = document.getElementById("colorPickerContainer");
-    if (container) {
-        const colorInput = document.getElementById("colorInput");
-        const colorValue = document.getElementById("colorValue");
-        const copyBtn = document.getElementById("copyColor");
+    const colorInput = document.getElementById("colorInput");
+    const colorValue = document.getElementById("colorValue");
+    const copyBtn = document.getElementById("copyColor");
 
+    if(colorInput && colorValue && copyBtn){
         colorValue.value = colorInput.value;
-        colorInput.addEventListener("input", () => colorValue.value = colorInput.value);
+
+        colorInput.addEventListener("input", () => {
+            colorValue.value = colorInput.value;
+        });
 
         copyBtn.addEventListener("click", () => {
             navigator.clipboard.writeText(colorValue.value);
@@ -150,44 +163,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ==============================
-    // Estilo artístico - mostrar containers e textareas
+    // Poses extras
     // ==============================
-    const estiloSelect = document.getElementById("estilo_artistico");
-    const chibiContainer = document.getElementById("adicional_chibi_container");
-    const animeContainer = document.getElementById("adicional_anime_container");
+    const posesSelect = document.getElementById('poses');
+    const descricaoInput = document.getElementById('descricaoPoses');
 
-    const chibiCheckbox = document.getElementById("adicional_chibi");
-    const chibiTextarea = document.getElementById("poses_chibi_text");
-
-    const animeCheckbox = document.getElementById("adicional_anime");
-    const animeTextarea = document.getElementById("poses_anime_text");
-
-    function atualizarEstiloArtistico() {
-        const valor = estiloSelect.value;
-        chibiContainer.style.display = "none";
-        animeContainer.style.display = "none";
-        chibiCheckbox.checked = false;
-        animeCheckbox.checked = false;
-        chibiTextarea.style.display = "none";
-        animeTextarea.style.display = "none";
-
-        if(valor === "Chibi") chibiContainer.style.display = "flex";
-        else if(valor === "Anime") animeContainer.style.display = "flex";
-
-        atualizarPreco();
+    if(posesSelect && descricaoInput){
+        posesSelect.addEventListener('change', () => {
+            if (posesSelect.value !== "") {
+                descricaoInput.style.display = "block";
+            } else {
+                descricaoInput.style.display = "none";
+                descricaoInput.value = "";
+            }
+        });
     }
 
-    estiloSelect.addEventListener("change", atualizarEstiloArtistico);
-
-    chibiCheckbox.addEventListener("change", () => {
-        chibiTextarea.style.display = chibiCheckbox.checked ? "block" : "none";
-        atualizarPreco();
-    });
-
-    animeCheckbox.addEventListener("change", () => {
-        animeTextarea.style.display = animeCheckbox.checked ? "block" : "none";
-        atualizarPreco();
-    });
-
-    atualizarEstiloArtistico();
 });
