@@ -111,24 +111,39 @@ document.addEventListener("DOMContentLoaded", function() {
     atualizarPreco();
 
     // ==============================
-    // Envio do pedido via WhatsApp
-    // ==============================
-    document.getElementById('enviarPedido').addEventListener('click', function() {
-        const form = document.getElementById('personagemForm');
-        const formData = new FormData(form);
-        let mensagem = "*📋 Formulário de Encomenda – Personagem Digital*\n\n";
+// Envio de pedido via WhatsApp
+// ==============================
+document.getElementById('enviarPedido').addEventListener('click', function() {
+    const form = document.getElementById('personagemForm');
+    const formData = new FormData(form);
+    let mensagem = "*📋 Formulário de Encomenda – Personagem Digital*\n\n";
 
-        for (let [key, value] of formData.entries()) {
-            if(value) mensagem += `*${key.replace(/_/g, ' ')}:* ${value}\n`;
-        }
+    // Adiciona todos os campos do formulário
+    for (let [key, value] of formData.entries()) {
+        if(value) mensagem += `*${key.replace(/_/g, ' ')}:* ${value}\n`;
+    }
 
-        const precoAtual = document.getElementById('precoTotal').innerText;
-        mensagem += `\n*${precoAtual}*`;
+    // Pega os preços exibidos na tela
+    const precoContainer = document.getElementById('precoTotal');
+    let precoAtual = '';
+    let precoComDesconto = '';
 
-        const numeroZap = "+5521978046832";
-        const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
-        window.open(url, '_blank');
-    });
+    if(precoContainer){
+        precoAtual = precoContainer.querySelector('#precoOriginal')?.innerText.trim() || '';
+        precoComDesconto = precoContainer.querySelector('#precoComDesconto')?.innerText.trim() || '';
+    }
+
+    // Adiciona preço na mensagem
+    if(precoAtual) mensagem += `\n*Preço atual:* ${precoAtual}`;
+    if(precoComDesconto && precoComDesconto !== precoAtual) {
+        mensagem += `\n*Preço com desconto:* ${precoComDesconto}`;
+    }
+
+    const numeroZap = "+5521978046832"; // número do WhatsApp
+    const url = `https://api.whatsapp.com/send?phone=${numeroZap}&text=${encodeURIComponent(mensagem)}`;
+    window.open(url, '_blank');
+});
+
 
     // ==============================
     // Paleta de cores
